@@ -1,0 +1,7 @@
+html{scroll-behavior:smooth}
+[hidden]{display:none!important}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #c9a36a;outline-offset:3px}
+.chip:hover,.btn2:hover{filter:brightness(1.15)}
+.btn:hover{filter:brightness(1.08)}
+.card{transition:border-color .2s}a.card:hover{border-color:#c9a36a}
+@media(max-width:760px){.tkk{width:100%!important;opacity:.3}}
