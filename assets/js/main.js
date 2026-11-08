@@ -1,5 +1,7 @@
 (function () {
 var $ = function (s, r) { return (r || document).querySelector(s); };
+
+/* ---------- Testimonials ---------- */
 var T = [
 { q: '\u201cProfessional, responsive and truly committed to their clients. Rahman & Associates gave us the clarity and confidence we needed.\u201d', w: '\u2014 Dato\u2019 Tan, Managing Director', img: 'assets/images/03-lawyer-testimonial-portrait.webp', alt: 'Dato\u2019 Tan, Managing Director' },
 { q: '\u201cRahman & Associates provided exceptional legal support with professionalism and care. Highly recommended!\u201d', w: '\u2014 Sarah Lim, Director, XYZ Holdings Sdn Bhd', img: 'https://randomuser.me/api/portraits/women/21.jpg', alt: 'Sarah Lim, Director, XYZ Holdings Sdn Bhd' },
@@ -25,6 +27,8 @@ $('.tc-prev').onclick = function () { show(i - 1); };
 $('.tc-next').onclick = function () { show(i + 1); };
 show(0);
 }
+
+/* ---------- Insights filter ---------- */
 var chips = document.querySelectorAll('.chip');
 if (chips.length) {
 var cards = document.querySelectorAll('a.card[data-k]');
@@ -36,6 +40,8 @@ cards.forEach(function (a) { a.hidden = !(k === 0 || +a.dataset.k === k); });
 };
 });
 }
+
+/* ---------- Contact form ---------- */
 var f = $('#req');
 if (f) {
 var btn = $('button', f), msg = document.createElement('p');
@@ -47,5 +53,39 @@ if (!n || !/\S+@\S+\.\S+/.test(m) || !t) { msg.textContent = 'Please enter your 
 msg.textContent = 'Opening your email app to send your request\u2026';
 location.href = 'mailto:enquiry@rahman-associates.com.my?subject=' + encodeURIComponent('Consultation request: ' + a) + '&body=' + encodeURIComponent('Name: ' + n + '\nEmail: ' + m + '\nPhone: ' + p + '\nPractice area: ' + a + '\n\n' + t);
 };
+}
+
+/* ---------- Count-up animation for stat figures ---------- */
+var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fmt(n) { return n.toLocaleString('en-MY'); }
+function animate(el, target, suffix) {
+  var dur = 1500, t0 = null;
+  function step(ts) {
+    if (!t0) t0 = ts;
+    var p = Math.min((ts - t0) / dur, 1);
+    var eased = 1 - Math.pow(1 - p, 3);           /* ease-out cubic */
+    el.textContent = fmt(Math.floor(eased * target)) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = fmt(target) + suffix;
+  }
+  requestAnimationFrame(step);
+}
+var statEls = document.querySelectorAll('.st > div:first-child');
+if (statEls.length && !reduced && 'IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      var m = el.textContent.trim().match(/^([\d,]+)(\D*)$/);
+      if (m) {
+        var target = parseInt(m[1].replace(/,/g, ''), 10);
+        var suffix = m[2] || '';
+        el.textContent = '0' + suffix;
+        animate(el, target, suffix);
+      }
+      io.unobserve(el);
+    });
+  }, { threshold: 0.35 });
+  statEls.forEach(function (el) { io.observe(el); });
 }
 })();
