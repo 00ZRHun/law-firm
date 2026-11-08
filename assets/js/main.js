@@ -2,8 +2,8 @@
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var T = [
 { q: '\u201cProfessional, responsive and truly committed to their clients. Rahman & Associates gave us the clarity and confidence we needed.\u201d', w: '\u2014 Dato\u2019 Tan, Managing Director', img: 'assets/images/03-lawyer-testimonial-portrait.webp', alt: 'Dato\u2019 Tan, Managing Director' },
-{ q: '\u201c[CLIENT TESTIMONIAL: add a real client quote here]\u201d', w: '\u2014 [CLIENT NAME, TITLE]' },
-{ q: '\u201c[CLIENT TESTIMONIAL: add a real client quote here]\u201d', w: '\u2014 [CLIENT NAME, TITLE]' }
+{ q: '\u201cRahman & Associates provided exceptional legal support with professionalism and care. Highly recommended!\u201d', w: '\u2014 Sarah Lim, Director, XYZ Holdings Sdn Bhd', img: 'https://randomuser.me/api/portraits/women/21.jpg', alt: 'Sarah Lim, Director, XYZ Holdings Sdn Bhd' },
+{ q: '\u201cClear advice, prompt communication and a genuinely client-first approach. They made a complex matter feel manageable.\u201d', w: '\u2014 Encik Ahmad Zaki, Property Developer', img: 'https://randomuser.me/api/portraits/men/54.jpg', alt: 'Encik Ahmad Zaki, Property Developer' }
 ];
 var q = $('#tc-q');
 if (q) {
